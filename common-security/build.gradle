@@ -1,0 +1,16 @@
+plugins {
+    id 'java-library'
+}
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.boot:spring-boot-dependencies:3.3.5'
+    }
+}
+
+dependencies {
+    api 'org.springframework.security:spring-security-core'
+    api 'org.springframework.security:spring-security-oauth2-resource-server'
+    api 'org.springframework.security:spring-security-oauth2-jose'
+    api 'org.springframework:spring-context'
+}
