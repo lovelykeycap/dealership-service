@@ -1,0 +1,357 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-001-seed-storage-reference-data
+      author: nikita
+      changes:
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: brand, value: "BMW" }
+              - column: { name: model, value: "X5" }
+              - column: { name: base_price, valueNumeric: 50000.00 }
+
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: brand, value: "Audi" }
+              - column: { name: model, value: "Q7" }
+              - column: { name: base_price, valueNumeric: 62000.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+              - column: { name: slot_type, value: "WHEELS" }
+              - column: { name: value, value: "Alloy 19" }
+              - column: { name: price, valueNumeric: 1200.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+              - column: { name: slot_type, value: "TRANSMISSION" }
+              - column: { name: value, value: "Automatic 8AT" }
+              - column: { name: price, valueNumeric: 2500.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+              - column: { name: slot_type, value: "INTERIOR" }
+              - column: { name: value, value: "Leather Black" }
+              - column: { name: price, valueNumeric: 1800.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+              - column: { name: slot_type, value: "COLOR" }
+              - column: { name: value, value: "Metallic Black" }
+              - column: { name: price, valueNumeric: 700.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+              - column: { name: slot_type, value: "FUEL_TYPE" }
+              - column: { name: value, value: "Petrol" }
+              - column: { name: price, valueNumeric: 0.00 }
+
+        - insert:
+            tableName: slot_variants
+            columns:
+              - column: { name: id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+              - column: { name: slot_type, value: "DRIVE" }
+              - column: { name: value, value: "AWD" }
+              - column: { name: price, valueNumeric: 1500.00 }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "WHEELS" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "TRANSMISSION" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "INTERIOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "COLOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "FUEL_TYPE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "DRIVE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "WHEELS" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "TRANSMISSION" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "INTERIOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "COLOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "FUEL_TYPE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+
+        - insert:
+            tableName: car_model_base_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "DRIVE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "WHEELS" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "INTERIOR" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+              - column: { name: slot_type, value: "COLOR" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "WHEELS" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "INTERIOR" }
+
+        - insert:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+              - column: { name: slot_type, value: "COLOR" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb401" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+              - column: { name: quantity, valueNumeric: 12 }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb402" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+              - column: { name: quantity, valueNumeric: 8 }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb403" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+              - column: { name: quantity, valueNumeric: 10 }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb404" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+              - column: { name: quantity, valueNumeric: 15 }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb405" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+              - column: { name: quantity, valueNumeric: 50 }
+
+        - insert:
+            tableName: slot_variant_stocks
+            columns:
+              - column: { name: id, value: "a6d79f83-7f93-4f49-a5de-6c51991cb406" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+              - column: { name: quantity, valueNumeric: 9 }
+
+        - insert:
+            tableName: car_configurations
+            columns:
+              - column: { name: id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "WHEELS" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a01" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "TRANSMISSION" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a02" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "INTERIOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a03" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "COLOR" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a04" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "FUEL_TYPE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a05" }
+
+        - insert:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: slot_type, value: "DRIVE" }
+              - column: { name: slot_variant_id, value: "1f01f393-fd0f-4f39-b9ea-32c0a20f0a06" }
+
+        - insert:
+            tableName: cars
+            columns:
+              - column: { name: id, value: "9d81fc5a-8f74-4ab0-a33e-e4be3d4bf501" }
+              - column: { name: configuration_id, value: "2a2ce011-766f-4b13-bb2a-9b9b59490a01" }
+              - column: { name: status, value: "AVAILABLE" }

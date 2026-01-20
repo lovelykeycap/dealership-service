@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 002-001-seed-order-reference-data
+      author: nikita
+      changes:
+        - insert:
+            tableName: clients
+            columns:
+              - column: { name: id, value: "8c45a402-3b09-4cf8-9c7d-7b8f6f5e1a01" }
+              - column: { name: name, value: "Ivan" }
+              - column: { name: surname, value: "Petrov" }
+
+        - insert:
+            tableName: clients
+            columns:
+              - column: { name: id, value: "8c45a402-3b09-4cf8-9c7d-7b8f6f5e1a02" }
+              - column: { name: name, value: "Anna" }
+              - column: { name: surname, value: "Sidorova" }
+
+        - insert:
+            tableName: managers
+            columns:
+              - column: { name: id, value: "7d3b5f33-7428-4e95-9dd9-2f26f0a7b101" }
+              - column: { name: name, value: "Oleg" }
+              - column: { name: surname, value: "Smirnov" }
+
+        - insert:
+            tableName: managers
+            columns:
+              - column: { name: id, value: "7d3b5f33-7428-4e95-9dd9-2f26f0a7b102" }
+              - column: { name: name, value: "Maria" }
+              - column: { name: surname, value: "Kuznetsova" }
+
+        - insert:
+            tableName: test_drive_allowed_models
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449301" }
+
+        - insert:
+            tableName: test_drive_allowed_models
+            columns:
+              - column: { name: car_model_id, value: "36a5243a-04ea-4aa2-95b7-f32dbe449302" }
+
+      rollback:
+        - delete:
+            tableName: test_drive_allowed_models
+            where: "car_model_id in ('36a5243a-04ea-4aa2-95b7-f32dbe449301','36a5243a-04ea-4aa2-95b7-f32dbe449302')"
+
+        - delete:
+            tableName: managers
+            where: "id in ('7d3b5f33-7428-4e95-9dd9-2f26f0a7b101','7d3b5f33-7428-4e95-9dd9-2f26f0a7b102')"
+
+        - delete:
+            tableName: clients
+            where: "id in ('8c45a402-3b09-4cf8-9c7d-7b8f6f5e1a01','8c45a402-3b09-4cf8-9c7d-7b8f6f5e1a02')"

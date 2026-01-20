@@ -1,0 +1,12 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-001-drop-order-catalog-foreign-keys
+      author: codex
+      changes:
+        - dropForeignKeyConstraint:
+            baseTableName: car_configurations
+            constraintName: fk_car_configurations_model
+        - dropForeignKeyConstraint:
+            baseTableName: car_configuration_selected_slots
+            constraintName: fk_car_configuration_selected_slots_slot_variant
+

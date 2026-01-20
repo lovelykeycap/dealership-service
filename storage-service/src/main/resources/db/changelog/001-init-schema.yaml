@@ -1,0 +1,387 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-001-create-core-storage-tables
+      author: nikita
+      changes:
+        - createTable:
+            tableName: car_models
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_car_models
+                    nullable: false
+              - column:
+                  name: brand
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model
+                  type: VARCHAR(128)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: base_price
+                  type: NUMERIC(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: slot_variants
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_slot_variants
+                    nullable: false
+              - column:
+                  name: slot_type
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: NUMERIC(19,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: car_configurations
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_car_configurations
+                    nullable: false
+              - column:
+                  name: model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: cars
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_cars
+                    nullable: false
+              - column:
+                  name: configuration_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: slot_variant_stocks
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_slot_variant_stocks
+                    nullable: false
+              - column:
+                  name: slot_variant_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_slot_variant_stocks_slot_variant_id
+              - column:
+                  name: quantity
+                  type: INT
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: 001-002-create-storage-join-tables
+      author: nikita
+      changes:
+        - createTable:
+            tableName: slot_variant_compatible_car_models
+            columns:
+              - column:
+                  name: slot_variant_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: slot_variant_compatible_car_models
+            columnNames: slot_variant_id, car_model_id
+            constraintName: pk_slot_variant_compatible_car_models
+
+        - createTable:
+            tableName: car_model_base_slots
+            columns:
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_type
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_variant_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: car_model_base_slots
+            columnNames: car_model_id, slot_type
+            constraintName: pk_car_model_base_slots
+
+        - createTable:
+            tableName: car_model_replaceable_slots
+            columns:
+              - column:
+                  name: car_model_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_type
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: car_model_replaceable_slots
+            columnNames: car_model_id, slot_type
+            constraintName: pk_car_model_replaceable_slots
+
+        - createTable:
+            tableName: car_configuration_selected_slots
+            columns:
+              - column:
+                  name: configuration_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_type
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_variant_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: car_configuration_selected_slots
+            columnNames: configuration_id, slot_type
+            constraintName: pk_car_configuration_selected_slots
+
+  - changeSet:
+      id: 001-003-add-storage-foreign-keys-and-checks
+      author: nikita
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: car_configurations
+            baseColumnNames: model_id
+            constraintName: fk_car_configurations_model
+            referencedTableName: car_models
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: cars
+            baseColumnNames: configuration_id
+            constraintName: fk_cars_configuration
+            referencedTableName: car_configurations
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: slot_variant_stocks
+            baseColumnNames: slot_variant_id
+            constraintName: fk_slot_variant_stocks_slot_variant
+            referencedTableName: slot_variants
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: slot_variant_compatible_car_models
+            baseColumnNames: slot_variant_id
+            constraintName: fk_svcm_slot_variant
+            referencedTableName: slot_variants
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: slot_variant_compatible_car_models
+            baseColumnNames: car_model_id
+            constraintName: fk_svcm_car_model
+            referencedTableName: car_models
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: car_model_base_slots
+            baseColumnNames: car_model_id
+            constraintName: fk_car_model_base_slots_model
+            referencedTableName: car_models
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: car_model_base_slots
+            baseColumnNames: slot_variant_id
+            constraintName: fk_car_model_base_slots_slot_variant
+            referencedTableName: slot_variants
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: car_model_replaceable_slots
+            baseColumnNames: car_model_id
+            constraintName: fk_car_model_replaceable_slots_model
+            referencedTableName: car_models
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: car_configuration_selected_slots
+            baseColumnNames: configuration_id
+            constraintName: fk_car_configuration_selected_slots_configuration
+            referencedTableName: car_configurations
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: car_configuration_selected_slots
+            baseColumnNames: slot_variant_id
+            constraintName: fk_car_configuration_selected_slots_slot_variant
+            referencedTableName: slot_variants
+            referencedColumnNames: id
+
+        - sql:
+            sql: ALTER TABLE car_models ADD CONSTRAINT ck_car_models_base_price_non_negative CHECK (base_price >= 0)
+
+        - sql:
+            sql: ALTER TABLE slot_variants ADD CONSTRAINT ck_slot_variants_price_non_negative CHECK (price >= 0)
+
+        - sql:
+            sql: ALTER TABLE slot_variant_stocks ADD CONSTRAINT ck_slot_variant_stocks_quantity_non_negative CHECK (quantity >= 0)
+
+        - createIndex:
+            tableName: cars
+            indexName: idx_cars_status
+            columns:
+              - column:
+                  name: status
