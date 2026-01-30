@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: order-service
+  datasource:
+    url: ${ORDER_DB_URL:jdbc:postgresql://localhost:5433/order_db}
+    username: ${ORDER_DB_USER:order_user}
+    password: ${ORDER_DB_PASSWORD:order_password}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8081/realms/dealership}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
+
+grpc:
+  client:
+    storage-cars:
+      address: ${storage-service.grpc.address:static://127.0.0.1:9091}
+      negotiationType: PLAINTEXT
+
+server:
+  port: ${SERVER_PORT:8080}
+
+storage-service:
+  base-url: ${STORAGE_SERVICE_BASE_URL:http://localhost:8082}
+  grpc:
+    address: ${ORDER_STORAGE_GRPC_ADDRESS:static://127.0.0.1:9091}
+    timeout-ms: ${STORAGE_GRPC_TIMEOUT_MS:5000}
+
+messaging:
+  outbox:
+    publisher:
+      initial-delay-ms: 2000
+      fixed-delay-ms: 2000
+      batch-size: 50
+      retry-delay-seconds: 5

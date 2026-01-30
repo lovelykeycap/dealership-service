@@ -1,0 +1,31 @@
+server:
+  port: ${SERVER_PORT:8082}
+
+grpc:
+  server:
+    port: ${GRPC_SERVER_PORT:9091}
+
+spring:
+  application:
+    name: storage-service
+  datasource:
+    url: ${STORAGE_DB_URL:jdbc:postgresql://localhost:5435/storage_db}
+    username: ${STORAGE_DB_USER:storage_user}
+    password: ${STORAGE_DB_PASSWORD:storage_password}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${KEYCLOAK_ISSUER_URI:http://localhost:8081/realms/dealership}
+  rabbitmq:
+    host: ${RABBITMQ_HOST:localhost}
+    port: ${RABBITMQ_PORT:5672}
+    username: ${RABBITMQ_USER:guest}
+    password: ${RABBITMQ_PASSWORD:guest}
