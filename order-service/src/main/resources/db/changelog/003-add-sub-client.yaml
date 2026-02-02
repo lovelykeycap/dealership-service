@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-001-create-sub-client-table
+      author: nikita
+      changes:
+        - createTable:
+            tableName: identity_client_binding
+            columns:
+              - column:
+                  name: issuer
+                  type: TEXT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_identity_binding
+                    nullable: false
+              - column:
+                  name: subject
+                  type: TEXT
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_identity_binding
+                    nullable: false
+              - column:
+                  name: client_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: identity_client_binding
+            columnNames: client_id
+            constraintName: uq_identity_client_binding_client_id
+
+      rollback:
+        - dropTable:
+            tableName: identity_client_binding
+
+
+  - changeSet:
+      id: 003-002-add-foreign-key
+      author: nikita
+      changes:
+        - addForeignKeyConstraint:
+            baseTableName: identity_client_binding
+            baseColumnNames: client_id
+            referencedTableName: clients
+            referencedColumnNames: id
+            constraintName: fk_identity_client_binding_client_id
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+      rollback:
+        - dropForeignKeyConstraint:
+            baseTableName: identity_client_binding
+            constraintName: fk_identity_client_binding_client_id
