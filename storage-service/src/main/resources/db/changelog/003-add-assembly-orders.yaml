@@ -1,0 +1,108 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-001-create-assembly-orders
+      author: nikita
+      changes:
+        - createTable:
+            tableName: assembly_orders
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    primaryKeyName: pk_assembly_orders
+                    nullable: false
+              - column:
+                  name: source_order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+                    unique: true
+                    uniqueConstraintName: uq_assembly_orders_source_order_id
+              - column:
+                  name: source_order_type
+                  type: VARCHAR(64)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_id
+                  type: UUID
+              - column:
+                  name: car_model_id
+                  type: UUID
+              - column:
+                  name: warehouse_manager_id
+                  type: UUID
+              - column:
+                  name: status
+                  type: VARCHAR(32)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP WITH TIME ZONE
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: removed
+                  type: BOOLEAN
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: assembly_order_required_slots
+            columns:
+              - column:
+                  name: assembly_order_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: slot_variant_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: assembly_order_required_slots
+            columnNames: assembly_order_id, slot_variant_id
+            constraintName: pk_assembly_order_required_slots
+
+        - addForeignKeyConstraint:
+            baseTableName: assembly_order_required_slots
+            baseColumnNames: assembly_order_id
+            constraintName: fk_assembly_order_required_slots_order
+            referencedTableName: assembly_orders
+            referencedColumnNames: id
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+
+        - addForeignKeyConstraint:
+            baseTableName: assembly_order_required_slots
+            baseColumnNames: slot_variant_id
+            constraintName: fk_assembly_order_required_slots_slot_variant
+            referencedTableName: slot_variants
+            referencedColumnNames: id
+            onDelete: RESTRICT
+            onUpdate: RESTRICT
+
+        - sql:
+            sql: ALTER TABLE assembly_orders ADD CONSTRAINT ck_assembly_orders_status CHECK (status IN ('CREATED','ASSEMBLED','FAIL'))
+
+        - sql:
+            sql: ALTER TABLE assembly_orders ADD CONSTRAINT ck_assembly_orders_source_type CHECK (source_order_type IN ('IN_STOCK','CONFIGURED'))
+
+      rollback:
+        - dropTable:
+            tableName: assembly_order_required_slots
+        - dropTable:
+            tableName: assembly_orders
