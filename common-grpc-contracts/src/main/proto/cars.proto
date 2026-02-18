@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package dealership.grpc.cars.v1;
+
+option java_multiple_files = true;
+option java_package = "dealership.grpc.cars.v1";
+option java_outer_classname = "CarsProto";
+
+import "google/protobuf/empty.proto";
+
+service CarsAvailabilityGrpcService {
+  rpc GetAvailableCars(google.protobuf.Empty) returns (GetAvailableCarsResponse);
+  rpc GetAvailableCarById(GetAvailableCarByIdRequest) returns (AvailableCar);
+}
+
+message GetAvailableCarsResponse {
+  repeated AvailableCar cars = 1;
+}
+
+message GetAvailableCarByIdRequest {
+  string car_id = 1;
+}
+
+message AvailableCar {
+  string car_id = 1;
+  string model_id = 2;
+  string brand = 3;
+  string model = 4;
+  string price = 5;
+  string status = 6;
+  repeated SelectedSlot selected_slots = 7;
+}
+
+message SelectedSlot {
+  string slot_id = 1;
+  string slot_type = 2;
+  string slot_name = 3;
+}
